@@ -1,3 +1,46 @@
 spring:
   application:
     name: sportlife
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sportlife
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+
+  data:
+    mongodb:
+      uri: mongodb+srv://gameepic730_db_user:58r5UB8MVHPMb9Dd@cluster0.7s3vru1.mongodb.net/sportlife?retryWrites=true&w=majority&appName=Cluster0
+
+
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: sportlife123
+    key-store-type: PKCS12
+    key-alias: sportlife
+    enabled: true
+
+
+jwt:
+  secret: af0213c7592c40a3da8e4db44e4952c97fdfb31a5bdfcce92c5151852800862c
+  expiration: 86400000
+
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
