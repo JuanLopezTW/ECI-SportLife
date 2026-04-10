@@ -1,6 +1,8 @@
 package com.dosw.sportlife.sportlife.controller;
 
+import com.dosw.sportlife.sportlife.controller.dto.request.LoginRequest;
 import com.dosw.sportlife.sportlife.controller.dto.request.RegisterRequest;
+import com.dosw.sportlife.sportlife.controller.dto.response.LoginResponse;
 import com.dosw.sportlife.sportlife.controller.dto.response.RegisterResponse;
 import com.dosw.sportlife.sportlife.controller.mapper.UserControllerMapper;
 import com.dosw.sportlife.sportlife.core.model.User;
@@ -27,6 +29,14 @@ public class AuthController {
     public ResponseEntity<RegisterResponse> register(@Valid @RequestBody RegisterRequest request) {
         User user = userControllerMapper.toModel(request);
         User savedUser = userService.register(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userControllerMapper.toResponse(savedUser));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userControllerMapper.toRegisterResponse(savedUser));
+    }
+
+    @PostMapping("/login")
+    @Operation(summary = "Login with email and password")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+        String token = userService.login(request.getEmail(), request.getPassword());
+        User user = userService.findByEmail(request.getEmail());
+        return ResponseEntity.ok(userControllerMapper.toLoginResponse(token, user));
     }
 }
