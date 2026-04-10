@@ -59,8 +59,14 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Test
-        run: mvn test
+      - name: Test and Coverage with JaCoCo
+        run: mvn test jacoco:report
+
+      - name: Upload JaCoCo report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
 
   analysis:
     name: Analysis
@@ -94,3 +100,4 @@ jobs:
           -Dsonar.organization=juanlopeztw
           -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
