@@ -21,6 +21,7 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://gameepic730_db_user:58r5UB8MVHPMb9Dd@cluster0.7s3vru1.mongodb.net/sportlife?retryWrites=true&w=majority&appName=Cluster0
+      auto-index-creation: false
 
 
 server:

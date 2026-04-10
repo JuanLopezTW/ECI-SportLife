@@ -10,7 +10,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
         basePackages = "com.dosw.sportlife.sportlife.persistence.relational.repository"
 )
 @EnableMongoRepositories(
-        basePackages = "com.dosw.sportlife.sportlife.persistence.nonrelational.repository"
+        basePackages = "com.dosw.sportlife.sportlife.persistence.nonrelational.repository",
+        mongoTemplateRef = "mongoTemplate"
 )
 public class DatabaseConfig {
 }
